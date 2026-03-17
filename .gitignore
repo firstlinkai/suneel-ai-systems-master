@@ -1,0 +1,28 @@
+# node_modules
+node_modules/
+.DS_Store
+dist/
+dist-ssr/
+*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# agent
+.agent/
+.gemini/
+brain/
+
+# others
+sample template.png
+assets_b64.json
+floowy_b64.txt

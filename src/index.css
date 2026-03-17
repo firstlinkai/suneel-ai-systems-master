@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f3f3f3;
+  --color-foreground: #2d3436;
+  --color-card: #ffffff;
+  --color-primary: #000000;
+  --color-secondary: #636e72;
+  --color-accent: #000000;
+
+  --blur-xs: 2px;
+}
+
+:root {
+  font-family: 'Outfit', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light;
+  background-color: #f3f3f3;
+  color: #2d3436;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.bg-glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.border-glass {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.text-gradient {
+  background: linear-gradient(180deg, #000 0%, #444 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.rounded-section {
+  border-radius: 3rem;
+}
