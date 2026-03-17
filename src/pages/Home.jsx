@@ -109,7 +109,7 @@ const Home = () => {
                         className="bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-sm hover:bg-blue-700 transition-all font-bold flex items-center gap-2"
                     >
                         <Zap className="w-3 h-3 fill-white" />
-                        AI Solutions
+                        Firstlink.AI
                     </Link>
                     <button
                         onClick={copyEmail}
@@ -329,7 +329,7 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="mt-20 pt-10 border-t border-black/5 flex justify-between items-center text-black/30 text-[12px] font-medium uppercase tracking-widest">
-                    <span>© 2024 Suneel</span>
+                    <span>© 2026 Firstlink AI</span>
                     <div className="flex gap-6 items-center">
                         <a href="https://www.linkedin.com/in/suneel-p/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
                             <Linkedin className="w-5 h-5" />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     Zap, 
     ArrowRight, 
@@ -9,172 +9,256 @@ import {
     Activity,
     FileText,
     ShieldCheck,
-    Lock
+    Lock,
+    ChevronRight,
+    Mail,
+    User,
+    Send
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const AiSalesPage = () => {
+    const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 5000);
+        setFormState({ name: '', email: '', message: '' });
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormState(prev => ({ ...prev, [name]: value }));
+    };
+
     return (
-        <div className="min-h-screen bg-[#0a0a0a] text-white font-['Outfit'] selection:bg-blue-500/30 overflow-x-hidden leading-relaxed">
-            {/* Minimal Navigation */}
-            <nav className="max-w-4xl mx-auto px-6 py-10 flex justify-between items-center relative z-10 border-b border-white/5">
+        <div className="min-h-screen bg-[#f3f3f3] text-[#2d3436] font-['Outfit'] selection:bg-black/10 overflow-x-hidden leading-relaxed">
+            {/* Navigation */}
+            <nav className="max-w-7xl mx-auto px-6 py-10 flex justify-between items-center relative z-10 border-b border-black/5">
                 <Link to="/" className="text-xl font-bold tracking-tighter flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center group-hover:rotate-6 transition-transform">
-                        <Target className="w-5 h-5 text-white" />
+                    <div className="w-8 h-8 bg-black rounded flex items-center justify-center group-hover:rotate-6 transition-transform">
+                        <Zap className="w-5 h-5 text-white" />
                     </div>
-                    <span>Suneel<span className="text-blue-500">.AI</span></span>
+                    <span>Firstlink<span className="text-black/40">.AI</span></span>
                 </Link>
-                <Link to="/" className="text-[12px] font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors">
+                <Link to="/" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
                     Back to Portfolio
                 </Link>
             </nav>
 
             {/* 1. Hero Section */}
-            <section className="max-w-4xl mx-auto pt-32 pb-40 px-6 text-center">
-                <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-4 py-1.5 rounded-full mb-10 backdrop-blur-sm">
-                    <Activity className="w-4 h-4 text-blue-500" />
+            <section className="max-w-4xl mx-auto pt-24 pb-32 px-6 text-center">
+                <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full mb-10 border border-black/5 shadow-sm">
+                    <Activity className="w-4 h-4 text-blue-600" />
                     <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">For Growth Agencies & DTC Brands</span>
                 </div>
                 
-                <h1 className="text-5xl md:text-8xl font-bold tracking-tight mb-10 leading-[1.05]">
-                    Stop Guessing. <br />
-                    <span className="text-blue-600">Start Scaling.</span>
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black">
+                    Your Competitors Already Found <br />
+                    <span className="text-black/40">Winning Ads.</span>
                 </h1>
                 
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-10 max-w-3xl mx-auto leading-tight">
-                    Turn Your Competitors’ Ad Spend Into Your Creative Blueprint.
+                <h2 className="text-2xl md:text-3xl font-bold text-black/80 mb-10 max-w-3xl mx-auto leading-tight">
+                    You Just Haven’t Mapped Them Yet.
                 </h2>
                 
-                <p className="text-lg md:text-xl text-white/40 max-w-2xl mx-auto mb-16 leading-relaxed font-medium">
-                    We leverage industrial-grade AI to monitor, analyze, and reverse-engineer every winning hook from your competitors across Facebook, Instagram, and TikTok. Get a weekly strategic roadmap with 10 production-ready ad concepts.
+                <p className="text-lg md:text-xl text-black/50 max-w-2xl mx-auto mb-12 leading-relaxed font-medium font-['Inter']">
+                    Turn your competitors’ ad spend into production-ready creative. We track and break down top-performing ads across Facebook, Instagram, and TikTok. Every week, you get a clear report showing what’s working right now—plus 10 ad concepts ready to produce.
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-                    <a href="mailto:info@suneelp.com" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-10 py-5 rounded-lg font-bold transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-2xl shadow-blue-600/20">
+                <div className="flex flex-col items-center gap-6">
+                    <a href="#contact" className="w-full sm:w-auto bg-black text-white px-10 py-5 rounded-full font-bold transition-all hover:scale-[1.02] active:scale-95 flex items-center justify-center gap-2 shadow-xl shadow-black/10">
                         Get My Sample Intelligence Report
                         <ArrowRight className="w-5 h-5" />
                     </a>
-                </div>
-                <p className="mt-6 text-[12px] font-bold uppercase tracking-widest text-white/20">Current Turnaround: Less than 24 Hours</p>
-            </section>
-
-            {/* 2. The Pain Point (The "Admin Debt" Section) */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-white/5">
-                <div className="max-w-2xl">
-                    <h2 className="text-3xl md:text-5xl font-bold mb-10 tracking-tight">Manual Market Research is a <span className="text-red-500">Revenue Leak.</span></h2>
-                    <p className="text-xl text-white/50 leading-relaxed font-medium">
-                        Most creative teams spend 8+ hours a week manually auditing the market, guessing based on "vibes." Our system replaces manual administrative debt with high-precision data. We identify exactly why your competitors are winning, so you can outperform them in a fraction of the time.
-                    </p>
+                    <div className="flex flex-col gap-2">
+                        <p className="text-[11px] font-bold uppercase tracking-widest text-black/30">(See exactly what you’ll receive before you commit)</p>
+                        <p className="text-[11px] font-bold uppercase tracking-widest text-blue-600">Turnaround: &lt; 24 Hours</p>
+                    </div>
                 </div>
             </section>
 
-            {/* 3. The Three Pillars of the System */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-white/10 space-y-32">
-                {/* Pillar 01 */}
-                <div className="group">
-                    <span className="text-blue-600 font-bold text-sm tracking-widest uppercase mb-6 block">Pillar 01</span>
-                    <h3 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight group-hover:translate-x-2 transition-transform duration-500">Cross-Platform Hook Intelligence</h3>
-                    <p className="text-xl text-white/40 leading-relaxed max-w-2xl font-['Inter']">
-                        Our system audits the first 3 seconds of every high-performing competitor creative. We break down the visual styles, audio cues, and text overlays that are successfully stopping the scroll in your niche.
+            {/* 2. The Pain Point */}
+            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-black/5">
+                <div className="max-w-3xl">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-10 tracking-tight text-black">Manual Market Research is a <span className="text-red-500/80">Revenue Leak.</span></h2>
+                    <p className="text-xl text-black/60 leading-relaxed font-medium font-['Inter'] mb-8">
+                        Most creative teams spend 8+ hours a week reviewing ads and guessing what works.
                     </p>
+                    <div className="bg-white p-8 rounded-3xl border border-black/5 shadow-sm inline-block">
+                        <p className="text-xl font-bold text-black mb-2">This system replaces that with clear data.</p>
+                        <p className="text-lg text-black/40 font-medium">You’ll know why competitors are winning—and what to test next.</p>
+                    </div>
                 </div>
+            </section>
 
-                {/* Pillar 02 */}
-                <div className="group">
-                    <span className="text-blue-600 font-bold text-sm tracking-widest uppercase mb-6 block">Pillar 02</span>
-                    <h3 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight group-hover:translate-x-2 transition-transform duration-500">Pattern Recognition & Gap Analysis</h3>
-                    <p className="text-xl text-white/40 leading-relaxed max-w-2xl font-['Inter']">
-                        We detect the specific creative formats currently scaling—whether it’s POV transformations, authority-based social proof, or routine demonstrations. We show you what is working now and identify the "Knowledge Gaps" your brand can exploit.
-                    </p>
-                </div>
-
-                {/* Pillar 03 */}
-                <div className="group">
-                    <span className="text-blue-600 font-bold text-sm tracking-widest uppercase mb-6 block">Pillar 03</span>
-                    <h3 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight group-hover:translate-x-2 transition-transform duration-500">The 24-Hour Creative Brief</h3>
-                    <p className="text-xl text-white/40 leading-relaxed max-w-2xl font-['Inter']">
-                        Move from observation to production instantly. Every intelligence report includes 10 new, unique ad scripts and storyboards architected from the aggregated data of your top competitors.
-                    </p>
-                </div>
+            {/* 3. The Three Pillars */}
+            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-black/5 space-y-32">
+                {[
+                    {
+                        num: "01",
+                        title: "Cross-Platform Hook Intelligence",
+                        desc: "We analyze the first 3 seconds of top-performing ads—what actually stops the scroll. You’ll see the exact visual styles, hooks, and messaging patterns being used in your market."
+                    },
+                    {
+                        num: "02",
+                        title: "Pattern Recognition & Gap Analysis",
+                        desc: "We identify the ad formats that are working right now—and the gaps your competitors are missing. This gives you clear angles to test instead of recycling the same ideas."
+                    },
+                    {
+                        num: "03",
+                        title: "The 24-Hour Creative Brief",
+                        desc: "You get 10 new ad scripts and storyboards every week, built from what’s already working in your niche. No brainstorming. No guesswork. Just execution."
+                    }
+                ].map((pillar, i) => (
+                    <div key={i} className="group">
+                        <span className="text-black/20 font-black text-4xl mb-6 block font-['Outfit']">Pillar {pillar.num}</span>
+                        <h3 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight text-black flex items-center gap-4">
+                            {pillar.title}
+                            <div className="h-px bg-black/10 flex-grow hidden md:block" />
+                        </h3>
+                        <p className="text-xl text-black/50 leading-relaxed max-w-2xl font-['Inter'] font-medium">
+                            {pillar.desc}
+                        </p>
+                    </div>
+                ))}
             </section>
 
             {/* 4. The Deliverable Node */}
-            <section className="bg-white/5 border-y border-white/10 py-32 px-6">
+            <section className="bg-white border-y border-black/5 py-32 px-6">
                 <div className="max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-6xl font-bold mb-16 tracking-tight text-center">Your Weekly Strategic Intelligence Report</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight text-center text-black">Your Weekly Strategic Intelligence Report Includes:</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {[
-                            { title: "The Hook Swipe File", desc: "15+ ready-to-test hooks tailored to your specific brand.", icon: <Zap /> },
-                            { title: "Creative Pattern Audit", desc: "A deep dive into winning visual and narrative structures.", icon: <BarChart3 /> },
-                            { title: "Competitor Performance Mapping", desc: "Detailed analysis of rival messaging and where they are failing.", icon: <Target /> },
-                            { title: "10 Production Scripts", desc: "High-converting copy ready for your next content shoot.", icon: <FileText /> }
+                            { title: "Hook Swipe File", desc: "15+ ready-to-test hooks tailored to your brand", icon: <Zap /> },
+                            { title: "Creative Pattern Audit", desc: "Breakdown of winning visual and narrative structures", icon: <BarChart3 /> },
+                            { title: "Competitor Performance Mapping", desc: "Where competitors are strong—and where they’re vulnerable", icon: <Target /> },
+                            { title: "10 Ready-to-Shoot Ad Scripts", desc: "Built for your next content production cycle", icon: <FileText /> }
                         ].map((item, i) => (
-                            <div key={i} className="bg-black/40 border border-white/5 p-10 rounded-2xl hover:border-blue-500/30 transition-colors group">
-                                <div className="text-blue-500 mb-6 group-hover:scale-110 transition-transform">{React.cloneElement(item.icon, { size: 32 })}</div>
-                                <h4 className="text-2xl font-bold mb-4">{item.title}</h4>
-                                <p className="text-white/40 leading-relaxed">{item.desc}</p>
+                            <div key={i} className="bg-[#fcfcfc] border border-black/5 p-8 rounded-3xl hover:border-black/20 transition-all group shadow-sm">
+                                <div className="text-black mb-6 group-hover:scale-110 transition-transform">{React.cloneElement(item.icon, { size: 28, className: "opacity-40" })}</div>
+                                <h4 className="text-xl font-bold mb-3 text-black">{item.title}</h4>
+                                <p className="text-black/50 font-['Inter'] font-medium">{item.desc}</p>
                             </div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 5. The "Grand Slam" Offer (The Wedge) */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-b border-white/5">
-                <span className="inline-block bg-blue-600 text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1 rounded mb-8">Special Access</span>
-                <h2 className="text-4xl md:text-6xl font-bold mb-10 tracking-tight">The "Industrial Precision" Beta</h2>
+            {/* 5. Why This Works */}
+            <section className="max-w-4xl mx-auto py-32 px-6 border-b border-black/5">
+                <div className="inline-block bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1 rounded-lg mb-8">Why This Works</div>
+                <h2 className="text-3xl md:text-5xl font-bold mb-10 tracking-tight text-black">Precision Engineering Meets Creative.</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                    <div>
-                        <p className="text-xl text-white/50 leading-relaxed mb-8">
-                            I spent 7 years in highly regulated engineering industry. I am now bringing that same engineering precision to your creative strategy.
+                    <div className="space-y-6">
+                        <p className="text-xl text-black/60 leading-relaxed font-medium font-['Inter']">
+                            I spent 7 years working in high-reliability engineering systems. That same approach is applied here—structured analysis, repeatable outputs, and no guesswork.
                         </p>
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-3 text-white/70">
-                                <ShieldCheck className="w-5 h-5 text-blue-500" />
-                                <span className="font-bold">No contracts. No hidden fees.</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-white/70">
-                                <Lock className="w-5 h-5 text-blue-500" />
-                                <span className="font-bold">Cancel anytime.</span>
-                            </div>
-                        </div>
+                        <p className="text-xl text-black font-bold font-['Outfit']">
+                            This isn’t trend-chasing. It’s a system.
+                        </p>
                     </div>
-                    <div className="bg-white/5 border border-white/10 p-10 rounded-2xl flex flex-col justify-center text-center">
-                        <p className="text-[12px] font-bold uppercase tracking-widest text-white/30 mb-4">Beta Partnership</p>
-                        <p className="text-5xl font-bold mb-2">$300/mo</p>
-                        <p className="text-sm text-white/40 mb-8">(Inclusive of Weekly Reports)</p>
-                        <p className="text-blue-500 font-bold text-sm">Limited to 5 agencies this month</p>
+                    <div className="bg-white border border-black/5 p-10 rounded-3xl flex flex-col justify-center text-center shadow-sm">
+                        <p className="text-[12px] font-bold uppercase tracking-widest text-black/30 mb-4">Beta Partnership</p>
+                        <p className="text-5xl font-bold mb-2 text-black">$300<span className="text-lg text-black/40">/mo</span></p>
+                        <p className="text-[13px] font-bold text-black/40 mb-8 uppercase tracking-widest">(Includes Weekly Reports)</p>
+                        <div className="space-y-3">
+                            <div className="flex items-center justify-center gap-2 text-black/60 font-bold text-sm">
+                                <ShieldCheck className="w-4 h-4" /> No contracts. Cancel anytime.
+                            </div>
+                            <p className="text-blue-600 font-bold text-sm uppercase tracking-widest">Limited to 5 agencies this month</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* 6. Call to Action (The Conversion Node) */}
-            <section className="max-w-4xl mx-auto py-40 px-6 text-center">
-                <h2 className="text-5xl md:text-8xl font-bold mb-12 tracking-tight">Ready to see the data?</h2>
-                <div className="flex flex-col items-center gap-8">
-                    <a href="mailto:info@suneelp.com" className="w-full sm:w-auto bg-white text-black px-12 py-5 rounded-lg font-black text-lg hover:scale-[1.05] transition-transform flex items-center justify-center gap-3 shadow-2xl shadow-white/10">
-                        Get My Sample Intelligence Report
-                        <ArrowUpRight className="w-6 h-6" />
-                    </a>
-                    <Link to="/" className="text-white/40 hover:text-white transition-colors uppercase tracking-[0.2em] text-[11px] font-bold">
+            {/* 6. Contact Form Section */}
+            <section id="contact" className="max-w-xl mx-auto py-32 px-6">
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight text-black">Want to see the data?</h2>
+                    <p className="text-black/50 font-medium">Get your sample report or reach out to start a partnership.</p>
+                </div>
+
+                <div className="bg-white p-10 rounded-[2.5rem] border border-black/5 shadow-xl">
+                    {submitted ? (
+                        <div className="py-20 text-center animate-in fade-in zoom-in duration-500">
+                            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <CheckCircle2 className="w-8 h-8 text-green-500" />
+                            </div>
+                            <h3 className="text-2xl font-bold text-black mb-2">Message Sent!</h3>
+                            <p className="text-black/40">I'll get back to you within 24 hours.</p>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="space-y-2">
+                                <label className="text-[12px] font-bold uppercase tracking-widest text-black/40 ml-4">Full Name</label>
+                                <input 
+                                    required
+                                    name="name"
+                                    value={formState.name}
+                                    onChange={handleInputChange}
+                                    placeholder="Jane Doe"
+                                    className="w-full bg-[#f8f8f8] border border-black/5 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black/5 transition-all font-medium" 
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-[12px] font-bold uppercase tracking-widest text-black/40 ml-4">Business Email</label>
+                                <input 
+                                    required
+                                    type="email"
+                                    name="email"
+                                    value={formState.email}
+                                    onChange={handleInputChange}
+                                    placeholder="jane@agency.com"
+                                    className="w-full bg-[#f8f8f8] border border-black/5 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black/5 transition-all font-medium" 
+                                />
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-[12px] font-bold uppercase tracking-widest text-black/40 ml-4">Message</label>
+                                <textarea 
+                                    required
+                                    name="message"
+                                    value={formState.message}
+                                    onChange={handleInputChange}
+                                    placeholder="Tell me about your competitors..."
+                                    rows="4"
+                                    className="w-full bg-[#f8f8f8] border border-black/5 px-6 py-4 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black/5 transition-all font-medium resize-none" 
+                                />
+                            </div>
+                            <button type="submit" className="w-full bg-black text-white py-5 rounded-2xl font-bold text-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 shadow-lg shadow-black/10">
+                                Send Message
+                                <Send className="w-5 h-5 opacity-50" />
+                            </button>
+                        </form>
+                    )}
+                </div>
+                
+                <div className="text-center mt-12">
+                     <Link to="/" className="text-black/30 hover:text-black transition-colors uppercase tracking-[0.2em] text-[11px] font-bold">
                         Return to Portfolio
                     </Link>
                 </div>
             </section>
 
-            {/* 7. Footer */}
-            <section className="max-w-4xl mx-auto py-20 px-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-10">
+            {/* Footer */}
+            <footer className="max-w-7xl mx-auto py-20 px-6 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-10">
                 <div className="flex flex-col gap-2">
                     <div className="text-xl font-bold tracking-tighter flex items-center gap-2">
-                        <Target className="w-5 h-5 text-blue-600" />
-                        <span>Suneel<span className="text-blue-500">.AI</span></span>
+                        <Zap className="w-5 h-5 text-black" />
+                        <span>Firstlink<span className="text-black/40">.AI</span></span>
                     </div>
-                    <p className="text-white/20 text-[11px] font-bold uppercase tracking-widest">Built with Precision.</p>
+                    <p className="text-black/20 text-[11px] font-bold uppercase tracking-widest">Built with Precision.</p>
                 </div>
-                <div className="text-white/20 text-[11px] font-bold uppercase tracking-widest md:text-right">
+                <div className="text-black/20 text-[11px] font-bold uppercase tracking-widest md:text-right">
                     © 2026 Suneel Pervez | Firstlink AI
                 </div>
-            </section>
+            </footer>
         </div>
     );
 };
