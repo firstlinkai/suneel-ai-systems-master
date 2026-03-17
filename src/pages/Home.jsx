@@ -68,13 +68,13 @@ const SavingsCalculator = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-black/5">
                 <div className="space-y-1">
                     <p className="text-[12px] font-black uppercase tracking-[0.2em] text-black/30">Cost Efficiency</p>
-                    <p className="text-4xl font-bold text-black">${costSaved.toLocaleString()}</p>
+                    <p className="text-3xl md:text-4xl font-bold text-black">${costSaved.toLocaleString()}</p>
                     <p className="text-[13px] text-black/40">Estimated Monthly ROI</p>
                 </div>
-                <div className="space-y-1 border-l border-black/5 pl-8 text-left">
+                <div className="space-y-1 border-t sm:border-t-0 sm:border-l border-black/5 pt-8 sm:pt-0 sm:pl-8 text-left">
                     <p className="text-[12px] font-black uppercase tracking-[0.2em] text-black/30">Time Efficiency</p>
                     <div className="flex items-baseline gap-2">
-                        <p className="text-4xl font-bold text-black">{savedHours}</p>
+                        <p className="text-3xl md:text-4xl font-bold text-black">{savedHours}</p>
                         <span className="text-lg font-bold text-black/40">Hours</span>
                     </div>
                     <p className="text-[13px] text-black/40">Reclaimed Per Month</p>
@@ -101,8 +101,8 @@ const Home = () => {
     return (
         <div className="min-h-screen bg-[#f3f3f3] text-[#2d3436] font-['Outfit'] selection:bg-black/10 overflow-x-hidden pb-20">
             {/* Top Nav/Header Info */}
-            <header className="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center text-[13px] font-medium text-black/60">
-                <div className="flex gap-4 items-center">
+            <header className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6 text-[13px] font-medium text-black/60">
+                <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 items-center">
                     <span className="bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm text-black font-bold">Suneel</span>
                     <Link 
                         to="/ai-system"
@@ -116,29 +116,29 @@ const Home = () => {
                         className="group bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-all flex items-center gap-2 active:scale-95"
                     >
                         {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                        {copied ? "Copied!" : "Copy Email"}
+                        {copied ? "Email" : "Email"}
                     </button>
-                    <div className="flex gap-3 ml-2">
-                        <a href="https://suneelp.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Personal Website">
-                            <User className="w-5 h-5" />
+                    <div className="flex gap-2">
+                        <a href="https://suneelp.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Personal Website">
+                            <User className="w-4 h-4" />
                         </a>
-                        <a href="https://firstlinkai.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Work Website">
-                            <Briefcase className="w-5 h-5" />
+                        <a href="https://firstlinkai.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Work Website">
+                            <Briefcase className="w-4 h-4" />
                         </a>
                     </div>
                 </div>
-                <div className="flex gap-8 items-center">
+                <div className="flex gap-6 md:gap-8 items-center">
                     <a href="https://www.linkedin.com/in/suneel-p/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Linkedin className="w-5 h-5" />
-                        <span>LinkedIn</span>
+                        <Linkedin className="w-4 h-4" />
+                        <span className="hidden sm:inline">LinkedIn</span>
                     </a>
                     <a href="https://www.facebook.com/aifirstlink/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Facebook className="w-5 h-5" />
-                        <span>Facebook</span>
+                        <Facebook className="w-4 h-4" />
+                        <span className="hidden sm:inline">Facebook</span>
                     </a>
                     <a href="https://www.instagram.com/firstlinkai/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Instagram className="w-5 h-5" />
-                        <span>Instagram</span>
+                        <Instagram className="w-4 h-4" />
+                        <span className="hidden sm:inline">Instagram</span>
                     </a>
                 </div>
             </header>
@@ -158,8 +158,9 @@ const Home = () => {
                     </div>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black max-w-2xl">
-                    Building digital products, brands, and experience.
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black">
+                    I build the systems that <br className="hidden md:block" />
+                    <span className="text-black/40">scale your business.</span>
                 </h1>
 
                 <div className="flex flex-col items-center gap-4">
@@ -261,8 +262,8 @@ const Home = () => {
 
             {/* Comparison Chart */}
             <section className="max-w-4xl mx-auto py-20 px-6">
-                <div className="overflow-hidden rounded-3xl border border-black/5 bg-white">
-                    <table className="w-full text-left border-collapse">
+                <div className="overflow-x-auto rounded-3xl border border-black/5 bg-white">
+                    <table className="w-full min-w-[600px] md:min-w-full text-left border-collapse">
                         <thead>
                             <tr className="border-b border-black/5 text-[12px] uppercase tracking-wider font-bold">
                                 <th className="p-6 text-black/30">Feature</th>
@@ -298,7 +299,7 @@ const Home = () => {
 
             {/* Footer CTA */}
             <section className="max-w-4xl mx-auto py-24 px-6 text-center">
-                <div className="bg-white p-20 rounded-[4rem] border border-black/5 shadow-sm flex flex-col items-center">
+                <div className="bg-white p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-black/5 shadow-sm flex flex-col items-center">
                     <div className="w-16 h-12 flex items-center justify-center mb-10">
                         {/* Minimal handshake icon replacement */}
                         <svg viewBox="0 0 24 24" className="w-10 h-10 opacity-30 fill-none stroke-current" strokeWidth="1.5">
@@ -309,10 +310,10 @@ const Home = () => {
                     <h2 className="text-4xl md:text-6xl font-bold mb-12 text-black tracking-tight leading-none px-4">
                         Tell me about your next project
                     </h2>
-                    <div className="flex gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                         <a
                             href={`mailto:${email}`}
-                            className="bg-black text-white px-8 py-3 rounded-full font-bold hover:scale-[1.02] transition-transform flex items-center gap-2 shadow-lg shadow-black/10"
+                            className="bg-black text-white px-8 py-3 rounded-full font-bold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 shadow-lg shadow-black/10 w-full sm:w-auto"
                         >
                             <Mail className="w-5 h-5" />
                             Email Me
@@ -321,7 +322,7 @@ const Home = () => {
                             href="https://wa.me/639956411291"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white text-black border border-black/10 px-8 py-3 rounded-full font-bold hover:bg-black/5 transition-colors shadow-sm flex items-center gap-2"
+                            className="bg-white text-black border border-black/10 px-8 py-3 rounded-full font-bold hover:bg-black/5 transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
                         >
                             <Smartphone className="w-5 h-5" />
                             WhatsApp
