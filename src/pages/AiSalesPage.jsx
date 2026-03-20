@@ -69,7 +69,7 @@ const AiSalesPage = () => {
                 </h2>
                 
                 <p className="text-lg md:text-xl text-black/50 max-w-2xl mx-auto mb-12 leading-relaxed font-medium font-['Inter']">
-                    Turn your competitors’ ad spend into production-ready creative. We track and break down top-performing ads across Facebook, Instagram, and TikTok. Every week, you get a clear report showing what’s working right now—plus 10 ad concepts ready to produce.
+                    Turn your competitors’ ad spend into production-ready creative. We track and break down top-performing ads across Facebook, Instagram, and TikTok. Every week, you get a clear report showing what’s working right now—plus 3 ad concepts ready to produce.
                 </p>
                 
                 <div className="flex flex-col items-center gap-6">
@@ -114,7 +114,7 @@ const AiSalesPage = () => {
                     {
                         num: "03",
                         title: "The 24-Hour Creative Brief",
-                        desc: "You get 10 new ad scripts and storyboards every week, built from what’s already working in your niche. No brainstorming. No guesswork. Just execution."
+                        desc: "You get 3 new ad scripts and storyboards every week, built from what’s already working in your niche. No brainstorming. No guesswork. Just execution."
                     }
                 ].map((pillar, i) => (
                     <div key={i} className="group">
@@ -136,10 +136,10 @@ const AiSalesPage = () => {
                     <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight text-center text-black">Your Weekly Strategic Intelligence Report Includes:</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {[
-                            { title: "Hook Swipe File", desc: "15+ ready-to-test hooks tailored to your brand", icon: <Zap /> },
+                            { title: "Hook Swipe File", desc: "10 ready-to-test hooks tailored to your brand", icon: <Zap /> },
                             { title: "Creative Pattern Audit", desc: "Breakdown of winning visual and narrative structures", icon: <BarChart3 /> },
                             { title: "Competitor Performance Mapping", desc: "Where competitors are strong—and where they’re vulnerable", icon: <Target /> },
-                            { title: "10 Ready-to-Shoot Ad Scripts", desc: "Built for your next content production cycle", icon: <FileText /> }
+                            { title: "3 Ready-to-Shoot Ad Scripts", desc: "Built for your next content production cycle", icon: <FileText /> }
                         ].map((item, i) => (
                             <div key={i} className="bg-[#fcfcfc] border border-black/5 p-8 rounded-3xl hover:border-black/20 transition-all group shadow-sm">
                                 <div className="text-black mb-6 group-hover:scale-110 transition-transform">{React.cloneElement(item.icon, { size: 28, className: "opacity-40" })}</div>
@@ -166,7 +166,10 @@ const AiSalesPage = () => {
                     </div>
                     <div className="bg-white border border-black/5 p-10 rounded-3xl flex flex-col justify-center text-center shadow-sm">
                         <p className="text-[12px] font-bold uppercase tracking-widest text-black/30 mb-4">Beta Partnership</p>
-                        <p className="text-5xl font-bold mb-2 text-black">$300<span className="text-lg text-black/40">/mo</span></p>
+                        <div className="flex items-baseline justify-center gap-3 mb-2">
+                            <span className="text-2xl font-bold text-black/30 line-through decoration-black/20">$1200</span>
+                            <p className="text-5xl font-bold text-black">$699<span className="text-lg text-black/40">/mo</span></p>
+                        </div>
                         <p className="text-[13px] font-bold text-black/40 mb-8 uppercase tracking-widest">(Includes Weekly Reports)</p>
                         <div className="space-y-3">
                             <div className="flex items-center justify-center gap-2 text-black/60 font-bold text-sm">
