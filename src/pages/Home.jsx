@@ -111,6 +111,13 @@ const Home = () => {
                         <Zap className="w-3 h-3 fill-white" />
                         Firstlink.AI
                     </Link>
+                    <Link 
+                        to="/work"
+                        className="bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-all text-black font-bold flex items-center gap-2"
+                    >
+                        <Briefcase className="w-3 h-3" />
+                        Work
+                    </Link>
                     <button
                         onClick={copyEmail}
                         className="group bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-all flex items-center gap-2 active:scale-95"
@@ -160,19 +167,17 @@ const Home = () => {
 
                 <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black">
                     I build the systems that <br className="hidden md:block" />
-                    <span className="text-black/40">scale your business.</span>
+                    <span className="text-black/40">scale marketing & DTC agencies.</span>
                 </h1>
 
                 <div className="flex flex-col items-center gap-4">
-                    <a
-                        href="https://www.github.com/firstlinkai"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <Link
+                        to="/work"
                         className="bg-black text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 group hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-black/10"
                     >
-                        Latest Work
+                        Explore Client Work
                         <ArrowUpRight className="w-4 h-4" />
-                    </a>
+                    </Link>
                     
                     <Link 
                         to="/ai-system"
@@ -205,7 +210,7 @@ const Home = () => {
             {/* Services Context */}
             <section className="max-w-4xl mx-auto py-20 px-6 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-16 text-black/80 max-w-2xl mx-auto leading-snug">
-                    Collaborate with brands and agencies to create impactful results.
+                    Collaborate with marketing & DTC agencies to build scalable automated systems.
                 </h2>
 
                 <div className="relative mb-20">

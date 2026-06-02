@@ -47,9 +47,14 @@ const AiSalesPage = () => {
                     </div>
                     <span>Firstlink<span className="text-black/40">.AI</span></span>
                 </Link>
-                <Link to="/" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
-                    Back to Portfolio
-                </Link>
+                <div className="flex gap-6 items-center">
+                    <Link to="/work" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
+                        Our Work
+                    </Link>
+                    <Link to="/" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
+                        Back to Home
+                    </Link>
+                </div>
             </nav>
 
             {/* 1. Hero Section */}
