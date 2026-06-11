@@ -20,12 +20,23 @@
   color: #2d3436;
 }
 
+html,
 body {
   margin: 0;
-  display: flex;
-  place-content: center;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
   min-width: 320px;
   min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .bg-glass {
