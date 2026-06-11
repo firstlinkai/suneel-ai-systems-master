@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { 
-  Zap, 
-  ArrowLeft, 
-  Github, 
+import {
+  Zap,
+  Github,
   ExternalLink,
   Target,
   BarChart3,
@@ -15,11 +13,11 @@ import {
   FileText,
   ShieldCheck,
   Activity,
-  User,
   Briefcase,
-  Mail
+  Mail,
+  FlaskConical
 } from 'lucide-react';
-import { projects, categories } from '../data/projects';
+import { devLabProjects, devLabCategories } from '../data/devLabProjects';
 
 // Helper to map icon names to Lucide icons
 const IconRenderer = ({ name, className }) => {
@@ -36,7 +34,7 @@ const IconRenderer = ({ name, className }) => {
     Activity: <Activity className={className} />,
     Mail: <Mail className={className} />
   };
-  return icons[name] || <Briefcase className={className} />;
+  return icons[name] || <FlaskConical className={className} />;
 };
 
 // Helper to generate premium stylized CSS visual previews
@@ -60,12 +58,12 @@ const VisualMockup = ({ preset, title, icon }) => {
     <div className={`w-full h-48 bg-gradient-to-br ${selectedGradient} relative overflow-hidden flex items-center justify-center`}>
       {/* Abstract Grid Overlays */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:14px_24px]" />
-      
+
       {/* Decorative Blur Orbs */}
       <div className="absolute -top-10 -left-10 w-24 h-24 bg-white/10 rounded-full blur-xl animate-pulse" />
       <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-black/30 rounded-full blur-2xl" />
 
-      {/* Floating Dashboard Card Simulator */}
+      {/* Floating Code Card Simulator */}
       <div className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 w-[85%] h-[75%] flex flex-col justify-between shadow-2xl transition-transform duration-500 group-hover:scale-105">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -74,65 +72,64 @@ const VisualMockup = ({ preset, title, icon }) => {
             </div>
             <span className="text-[11px] font-bold tracking-wider text-white/90 uppercase">{title.split(' ')[0]}</span>
           </div>
-          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-        </div>
-
-        {/* Mock Analytics Lines */}
-        <div className="space-y-2 py-2">
-          <div className="h-1 bg-white/20 rounded-full w-3/4" />
-          <div className="h-1 bg-white/10 rounded-full w-1/2" />
-          <div className="flex gap-1 pt-1 items-end h-6">
-            <div className="w-full bg-white/20 rounded-t h-[40%]" />
-            <div className="w-full bg-white/30 rounded-t h-[75%]" />
-            <div className="w-full bg-white/45 rounded-t h-[55%]" />
-            <div className="w-full bg-white/20 rounded-t h-[90%]" />
-            <div className="w-full bg-white/50 rounded-t h-[45%]" />
-            <div className="w-full bg-white/60 rounded-t h-[80%]" />
+          <div className="flex gap-1">
+            <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
+            <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
           </div>
         </div>
 
+        {/* Mock Code Lines */}
+        <div className="space-y-1.5 py-2 font-mono">
+          <div className="h-1 bg-white/30 rounded-full w-1/3" />
+          <div className="h-1 bg-white/15 rounded-full w-3/4 ml-3" />
+          <div className="h-1 bg-white/15 rounded-full w-2/3 ml-3" />
+          <div className="h-1 bg-white/25 rounded-full w-1/2 ml-6" />
+          <div className="h-1 bg-white/30 rounded-full w-1/4" />
+        </div>
+
         <div className="flex items-center justify-between text-[9px] text-white/50 font-mono">
-          <span>SYSTEM // OK</span>
-          <span>ROI +320%</span>
+          <span>BUILD // PASSING</span>
+          <span>v0.1.0</span>
         </div>
       </div>
     </div>
   );
 };
 
-const Projects = () => {
+const DevLab = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
-    : projects.filter(p => p.category === selectedCategory);
+  const filteredProjects = selectedCategory === "All"
+    ? devLabProjects
+    : devLabProjects.filter(p => p.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-[#f3f3f3] text-[#2d3436] font-['Outfit'] selection:bg-black/10 overflow-x-hidden leading-relaxed pb-32">
-      
+
       <Navbar />
 
       {/* Hero Header */}
       <section className="max-w-4xl mx-auto pt-20 pb-16 px-6 text-center">
         <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full mb-6 border border-black/5 shadow-sm">
-          <Briefcase className="w-4 h-4 text-blue-600" />
-          <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">Marketing agency client solutions</span>
+          <FlaskConical className="w-4 h-4 text-blue-600" />
+          <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">Personal experiments & side projects</span>
         </div>
-        
+
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1] text-black">
-          High-Performance Systems <br />
-          <span className="text-black/40">Built For Scale.</span>
+          The Dev Lab. <br />
+          <span className="text-black/40">Where Ideas Get Built.</span>
         </h1>
-        
+
         <p className="text-lg text-black/50 max-w-2xl mx-auto font-medium font-['Inter']">
-          Explore production-ready automation architectures, analytics dashboards, and campaign intelligence pipelines built strictly for high-growth marketing and DTC teams.
+          A workbench of self-driven builds — prototypes, tools, and creative-coding experiments I make to explore new tech and scratch my own itches. No clients, no briefs, just curiosity.
         </p>
       </section>
 
       {/* Categories Filter Strip */}
       <section className="max-w-5xl mx-auto px-6 mb-12 flex justify-center">
         <div className="flex flex-wrap gap-2 justify-center bg-white/50 backdrop-blur p-2 rounded-2xl border border-black/5">
-          {categories.map((cat, i) => (
+          {devLabCategories.map((cat, i) => (
             <button
               key={i}
               onClick={() => setSelectedCategory(cat)}
@@ -152,17 +149,17 @@ const Projects = () => {
       <section className="max-w-6xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map((project) => (
-            <div 
-              key={project.id} 
+            <div
+              key={project.id}
               className="bg-white rounded-[2.5rem] border border-black/5 overflow-hidden shadow-sm hover:shadow-xl hover:border-black/15 transition-all group flex flex-col justify-between"
             >
               <div>
                 {/* Visual Representation (Dynamic Image or Stylized Mockup) */}
                 {project.image ? (
                   <div className="w-full h-48 overflow-hidden relative">
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
+                    <img
+                      src={project.image}
+                      alt={project.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
@@ -201,17 +198,19 @@ const Projects = () => {
 
                 {/* GitHub & Demo Links */}
                 <div className="flex gap-3 pt-2">
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
+                  <a
+                    href={project.github}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex-1 bg-black text-white py-2.5 rounded-xl text-[12px] font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-transform"
                   >
                     <Github className="w-3.5 h-3.5" /> GitHub
                   </a>
                   {project.demo && project.demo !== "#" && (
-                    <a 
-                      href={project.demo} 
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="px-3 bg-white border border-black/10 rounded-xl text-black/60 hover:text-black hover:bg-black/5 transition-colors flex items-center justify-center"
                       title="Live Demo"
                     >
@@ -228,7 +227,7 @@ const Projects = () => {
       {/* Dynamic Count Footer Status */}
       <section className="max-w-4xl mx-auto mt-20 text-center">
         <p className="text-[12px] font-bold uppercase tracking-widest text-black/30">
-          Showing {filteredProjects.length} client application architectures
+          Showing {filteredProjects.length} lab experiment{filteredProjects.length === 1 ? '' : 's'}
         </p>
       </section>
 
@@ -236,4 +235,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default DevLab;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 import {
     ChevronRight,
     Search,
@@ -21,16 +22,6 @@ import {
     Check
 } from 'lucide-react';
 
-const clients = [
-    { name: "SpeakEasy Marketing", logo: "/logos/speakeasy.png" },
-    { name: "Floowy.ai", logo: "/logos/floowy.png" },
-    { name: "DGTL BASE", logo: "/logos/dgtlbase.png" },
-    { name: "10xGrowth", logo: "/logos/10xgrowth.jpg" },
-    { name: "Botanic", logo: "/logos/botanic.png" },
-    { name: "Wild Boocha", logo: "/logos/wildboocha.png" },
-    { name: "Firstlink AI", logo: "/logos/firstlinkai.jpg" },
-    { name: "Picka Chai", logo: "/logos/pickachai.png" },
-];
 
 const SavingsCalculator = () => {
     const [volume, setVolume] = useState(10);
@@ -91,6 +82,18 @@ const SavingsCalculator = () => {
 const Home = () => {
     const [copied, setCopied] = useState(false);
     const email = "info@suneelp.com";
+    const [formStatus, setFormStatus] = useState(null); // 'success' | 'error' | null
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.state?.scrollToContact) {
+            setTimeout(() => {
+                document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+            window.history.replaceState({}, document.title);
+        }
+    }, [location]);
 
     const copyEmail = () => {
         navigator.clipboard.writeText(email);
@@ -98,57 +101,41 @@ const Home = () => {
         setTimeout(() => setCopied(false), 2000);
     };
 
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setFormStatus(null);
+
+        const formData = new FormData(e.target);
+        const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
+        formData.append("access_key", accessKey);
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json"
+                },
+                body: formData
+            });
+            const result = await response.json();
+            if (result.success) {
+                setFormStatus("success");
+                e.target.reset();
+            } else {
+                setFormStatus("error");
+            }
+        } catch (error) {
+            setFormStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#f3f3f3] text-[#2d3436] font-['Outfit'] selection:bg-black/10 overflow-x-hidden pb-20">
             {/* Top Nav/Header Info */}
-            <header className="max-w-7xl mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-6 text-[13px] font-medium text-black/60">
-                <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 items-center">
-                    <span className="bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm text-black font-bold">Suneel</span>
-                    <Link 
-                        to="/ai-system"
-                        className="bg-blue-600 text-white px-4 py-1.5 rounded-full shadow-sm hover:bg-blue-700 transition-all font-bold flex items-center gap-2"
-                    >
-                        <Zap className="w-3 h-3 fill-white" />
-                        Firstlink.AI
-                    </Link>
-                    <Link 
-                        to="/work"
-                        className="bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-all text-black font-bold flex items-center gap-2"
-                    >
-                        <Briefcase className="w-3 h-3" />
-                        Work
-                    </Link>
-                    <button
-                        onClick={copyEmail}
-                        className="group bg-white px-4 py-1.5 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-all flex items-center gap-2 active:scale-95"
-                    >
-                        {copied ? <Check className="w-3 h-3 text-green-500" /> : <Copy className="w-3 h-3" />}
-                        {copied ? "Email" : "Email"}
-                    </button>
-                    <div className="flex gap-2">
-                        <a href="https://suneelp.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Personal Website">
-                            <User className="w-4 h-4" />
-                        </a>
-                        <a href="https://firstlinkai.com/" target="_blank" rel="noopener noreferrer" className="bg-white p-2 rounded-full border border-black/5 shadow-sm hover:bg-black/5 transition-colors" title="Work Website">
-                            <Briefcase className="w-4 h-4" />
-                        </a>
-                    </div>
-                </div>
-                <div className="flex gap-6 md:gap-8 items-center">
-                    <a href="https://www.linkedin.com/in/suneel-p/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Linkedin className="w-4 h-4" />
-                        <span className="hidden sm:inline">LinkedIn</span>
-                    </a>
-                    <a href="https://www.facebook.com/aifirstlink/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Facebook className="w-4 h-4" />
-                        <span className="hidden sm:inline">Facebook</span>
-                    </a>
-                    <a href="https://www.instagram.com/firstlinkai/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
-                        <Instagram className="w-4 h-4" />
-                        <span className="hidden sm:inline">Instagram</span>
-                    </a>
-                </div>
-            </header>
+            <Navbar />
 
             {/* Hero Section */}
             <section className="max-w-4xl mx-auto pt-20 pb-24 px-6 flex flex-col items-center text-center">
@@ -175,36 +162,19 @@ const Home = () => {
                         to="/work"
                         className="bg-black text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 group hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-black/10"
                     >
-                        Explore Client Work
+                        Explore Agency Systems
                         <ArrowUpRight className="w-4 h-4" />
                     </Link>
-                    
-                    <Link 
-                        to="/ai-system"
+
+                    <Link
+                        to="/dev-lab"
                         className="text-[13px] font-bold text-black/40 hover:text-black transition-colors flex items-center gap-1 group"
                     >
-                        Explore AI Systems
+                        Explore Work
                         <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                     </Link>
                 </div>
 
-                {/* Logo Strip */}
-                <div className="mt-28 w-full overflow-hidden">
-                    <div className="flex flex-wrap justify-center gap-10 md:gap-16 items-center opacity-30 grayscale saturate-0 hover:opacity-50 transition-opacity">
-                        {clients.map((client, index) => (
-                            <img
-                                key={index}
-                                src={client.logo}
-                                alt={client.name}
-                                className={
-                                    client.name === "DGTL BASE" || client.name === "SpeakEasy Marketing" || client.name === "Wild Boocha"
-                                        ? "h-10 md:h-16 object-contain"
-                                        : "h-8 md:h-12 object-contain"
-                                }
-                            />
-                        ))}
-                    </div>
-                </div>
             </section>
 
             {/* Services Context */}
@@ -259,7 +229,7 @@ const Home = () => {
 
             {/* Savings & Efficiency Calculator */}
             <section className="max-w-4xl mx-auto py-20 px-6">
-                <div className="bg-white p-12 rounded-[3rem] border border-black/5 shadow-sm text-center">
+                <div className="bg-white p-6 sm:p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-black/5 shadow-sm text-center">
                     <h2 className="text-2xl font-bold mb-12 text-black/80">The Efficiency Advantage</h2>
                     <SavingsCalculator />
                 </div>
@@ -302,6 +272,32 @@ const Home = () => {
                 </div>
             </section>
 
+            {/* Contact Form Section */}
+            <section id="contact-section" className="max-w-4xl mx-auto py-12 px-6 flex flex-col items-center">
+                <h2 className="text-3xl font-bold mb-8 text-black text-center">Let's Connect</h2>
+                <div className="form-container">
+                    <form onSubmit={handleFormSubmit} className="form">
+                        <div className="form-group">
+                            <label htmlFor="email">Company Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter company email" />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="textarea">How Can We Help You?</label>
+                            <textarea id="textarea" name="message" required placeholder="Describe your project..."></textarea>
+                        </div>
+                        <button type="submit" disabled={isSubmitting} className="form-submit-btn">
+                            {isSubmitting ? "Sending..." : "Submit"}
+                        </button>
+                        {formStatus === "success" && (
+                            <p className="text-green-400 text-[13px] mt-2 font-medium">Message sent successfully! I'll get back to you soon.</p>
+                        )}
+                        {formStatus === "error" && (
+                            <p className="text-red-400 text-[13px] mt-2 font-medium">Something went wrong. Please check your access key or try again.</p>
+                        )}
+                    </form>
+                </div>
+            </section>
+
             {/* Footer CTA */}
             <section className="max-w-4xl mx-auto py-24 px-6 text-center">
                 <div className="bg-white p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-black/5 shadow-sm flex flex-col items-center">
@@ -334,9 +330,9 @@ const Home = () => {
                         </a>
                     </div>
                 </div>
-                <div className="mt-20 pt-10 border-t border-black/5 flex justify-between items-center text-black/30 text-[12px] font-medium uppercase tracking-widest">
+                <div className="mt-20 pt-10 border-t border-black/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-black/30 text-[12px] font-medium uppercase tracking-widest">
                     <span>© 2026 Firstlink AI</span>
-                    <div className="flex gap-6 items-center">
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 items-center">
                         <a href="https://www.linkedin.com/in/suneel-p/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
                             <Linkedin className="w-5 h-5" />
                             <span>LinkedIn</span>

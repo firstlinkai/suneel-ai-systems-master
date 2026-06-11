@@ -16,6 +16,7 @@ import {
     Send
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const AiSalesPage = () => {
     const [formState, setFormState] = useState({
@@ -40,31 +41,16 @@ const AiSalesPage = () => {
     return (
         <div className="min-h-screen bg-[#f3f3f3] text-[#2d3436] font-['Outfit'] selection:bg-black/10 overflow-x-hidden leading-relaxed">
             {/* Navigation */}
-            <nav className="max-w-7xl mx-auto px-6 py-10 flex justify-between items-center relative z-10 border-b border-black/5">
-                <Link to="/" className="text-xl font-bold tracking-tighter flex items-center gap-2 group">
-                    <div className="w-8 h-8 bg-black rounded flex items-center justify-center group-hover:rotate-6 transition-transform">
-                        <Zap className="w-5 h-5 text-white" />
-                    </div>
-                    <span>Firstlink<span className="text-black/40">.AI</span></span>
-                </Link>
-                <div className="flex gap-6 items-center">
-                    <Link to="/work" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
-                        Our Work
-                    </Link>
-                    <Link to="/" className="text-[12px] font-bold uppercase tracking-widest text-black/40 hover:text-black transition-colors">
-                        Back to Home
-                    </Link>
-                </div>
-            </nav>
+            <Navbar />
 
             {/* 1. Hero Section */}
-            <section className="max-w-4xl mx-auto pt-24 pb-32 px-6 text-center">
+            <section className="max-w-4xl mx-auto pt-16 pb-20 md:pt-24 md:pb-32 px-6 text-center">
                 <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full mb-10 border border-black/5 shadow-sm">
                     <Activity className="w-4 h-4 text-blue-600" />
-                    <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">For Growth Agencies & DTC Brands</span>
+                    <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] opacity-70">For Growth Agencies & DTC Brands</span>
                 </div>
-                
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black">
+
+                <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-black">
                     Your Competitors Already Found <br />
                     <span className="text-black/40">Winning Ads.</span>
                 </h1>
@@ -90,7 +76,7 @@ const AiSalesPage = () => {
             </section>
 
             {/* 2. The Pain Point */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-black/5">
+            <section className="max-w-4xl mx-auto py-20 md:py-32 px-6 border-t border-black/5">
                 <div className="max-w-3xl">
                     <h2 className="text-3xl md:text-5xl font-bold mb-10 tracking-tight text-black">Manual Market Research is a <span className="text-red-500/80">Revenue Leak.</span></h2>
                     <p className="text-xl text-black/60 leading-relaxed font-medium font-['Inter'] mb-8">
@@ -104,7 +90,7 @@ const AiSalesPage = () => {
             </section>
 
             {/* 3. The Three Pillars */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-t border-black/5 space-y-32">
+            <section className="max-w-4xl mx-auto py-20 md:py-32 px-6 border-t border-black/5 space-y-32">
                 {[
                     {
                         num: "01",
@@ -136,7 +122,7 @@ const AiSalesPage = () => {
             </section>
 
             {/* 4. The Deliverable Node */}
-            <section className="bg-white border-y border-black/5 py-32 px-6">
+            <section className="bg-white border-y border-black/5 py-20 md:py-32 px-6">
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-3xl md:text-5xl font-bold mb-16 tracking-tight text-center text-black">Your Weekly Strategic Intelligence Report Includes:</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -157,7 +143,7 @@ const AiSalesPage = () => {
             </section>
 
             {/* 5. Why This Works */}
-            <section className="max-w-4xl mx-auto py-32 px-6 border-b border-black/5">
+            <section className="max-w-4xl mx-auto py-20 md:py-32 px-6 border-b border-black/5">
                 <div className="inline-block bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] px-3 py-1 rounded-lg mb-8">Why This Works</div>
                 <h2 className="text-3xl md:text-5xl font-bold mb-10 tracking-tight text-black">Precision Engineering Meets Creative.</h2>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -187,7 +173,7 @@ const AiSalesPage = () => {
             </section>
 
             {/* 6. Contact Form Section */}
-            <section id="contact" className="max-w-xl mx-auto py-32 px-6">
+            <section id="contact" className="max-w-xl mx-auto py-20 md:py-32 px-6">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight text-black">Want to see the data?</h2>
                     <p className="text-black/50 font-medium">Get your sample report or reach out to start a partnership.</p>
