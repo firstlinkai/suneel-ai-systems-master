@@ -11,6 +11,9 @@
   --blur-xs: 2px;
 }
 
+/* Enable class-based dark mode (default v4 dark variant is media-query based) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   font-family: 'Outfit', 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -18,6 +21,46 @@
   color-scheme: light;
   background-color: #f3f3f3;
   color: #2d3436;
+}
+
+/*
+  Dark mode.
+  The whole site is built on black/white Tailwind utilities, which compile to
+  var(--color-black) / var(--color-white). Re-pointing those two variables under
+  .dark flips every text-black / bg-white / border-black\/X utility site-wide.
+  The few arbitrary hex backgrounds are handled explicitly below.
+*/
+html.dark {
+  --color-white: #1a1d24; /* surfaces / cards */
+  --color-black: #f1f3f5; /* text / borders */
+  background-color: #0f1115;
+  color: #e6e8eb;
+}
+
+html.dark body {
+  background-color: #0f1115;
+  color: #e6e8eb;
+}
+
+/* Arbitrary palette values used for the page shell */
+html.dark .bg-\[\#f3f3f3\] {
+  background-color: #0f1115;
+}
+
+html.dark .text-\[\#2d3436\] {
+  color: #e6e8eb;
+}
+
+/* Smooth the transition when toggling themes */
+html,
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Logical spacing helpers so RTL (Arabic) mirrors correctly */
+html[dir='rtl'] .animate-bounce {
+  /* keep the floating name badge anchored on the correct side in RTL */
+  direction: ltr;
 }
 
 html,

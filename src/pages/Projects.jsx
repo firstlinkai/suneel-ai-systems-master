@@ -20,6 +20,16 @@ import {
   Mail
 } from 'lucide-react';
 import { projects, categories } from '../data/projects';
+import { usePreferences } from '../context/PreferencesContext';
+import { projectContent } from '../i18n/projectContent';
+
+// Maps the canonical (English) category value to its translation key.
+const CATEGORY_KEYS = {
+  'All': 'cat.all',
+  'Top of Funnel': 'cat.topOfFunnel',
+  'Mid-Funnel': 'cat.midFunnel',
+  'Operations & Loyalty': 'cat.opsLoyalty',
+};
 
 // Helper to map icon names to Lucide icons
 const IconRenderer = ({ name, className }) => {
@@ -101,6 +111,7 @@ const VisualMockup = ({ preset, title, icon }) => {
 };
 
 const Projects = () => {
+  const { t, lang } = usePreferences();
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const filteredProjects = selectedCategory === "All" 
@@ -116,16 +127,16 @@ const Projects = () => {
       <section className="max-w-4xl mx-auto pt-20 pb-16 px-6 text-center">
         <div className="inline-flex items-center gap-2 bg-white px-4 py-1.5 rounded-full mb-6 border border-black/5 shadow-sm">
           <Briefcase className="w-4 h-4 text-blue-600" />
-          <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">Marketing agency client solutions</span>
+          <span className="text-[11px] font-black uppercase tracking-[0.2em] opacity-70">{t('work.badge')}</span>
         </div>
-        
+
         <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1] text-black">
-          High-Performance Systems <br />
-          <span className="text-black/40">Built For Scale.</span>
+          {t('work.title1')} <br />
+          <span className="text-black/40">{t('work.title2')}</span>
         </h1>
-        
+
         <p className="text-lg text-black/50 max-w-2xl mx-auto font-medium font-['Inter']">
-          Explore production-ready automation architectures, analytics dashboards, and campaign intelligence pipelines built strictly for high-growth marketing and DTC teams.
+          {t('work.subtitle')}
         </p>
       </section>
 
@@ -142,7 +153,7 @@ const Projects = () => {
                   : "text-black/50 hover:text-black hover:bg-black/5"
               }`}
             >
-              {cat}
+              {t(CATEGORY_KEYS[cat] || cat)}
             </button>
           ))}
         </div>
@@ -174,7 +185,7 @@ const Projects = () => {
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-4">
                     <span className="bg-[#f3f3f3] text-black/60 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-black/5">
-                      {project.category}
+                      {t(CATEGORY_KEYS[project.category] || project.category)}
                     </span>
                   </div>
 
@@ -183,7 +194,7 @@ const Projects = () => {
                   </h3>
 
                   <p className="text-[14px] text-black/50 leading-relaxed font-['Inter'] mb-6">
-                    {project.description}
+                    {projectContent[lang]?.[project.id] ?? project.description}
                   </p>
                 </div>
               </div>
@@ -213,7 +224,7 @@ const Projects = () => {
                     <a 
                       href={project.demo} 
                       className="px-3 bg-white border border-black/10 rounded-xl text-black/60 hover:text-black hover:bg-black/5 transition-colors flex items-center justify-center"
-                      title="Live Demo"
+                      title={t('common.liveDemo')}
                     >
                       <ExternalLink className="w-3.5 h-3.5" />
                     </a>
@@ -228,7 +239,7 @@ const Projects = () => {
       {/* Dynamic Count Footer Status */}
       <section className="max-w-4xl mx-auto mt-20 text-center">
         <p className="text-[12px] font-bold uppercase tracking-widest text-black/30">
-          Showing {filteredProjects.length} client application architectures
+          {t('work.showing').replace('{n}', filteredProjects.length)}
         </p>
       </section>
 
