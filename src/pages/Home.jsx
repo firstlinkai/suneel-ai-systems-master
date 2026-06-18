@@ -554,16 +554,20 @@ const Home = () => {
         setFormStatus(null);
 
         const formData = new FormData(e.target);
-        const accessKey = import.meta.env.VITE_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
-        formData.append("access_key", accessKey);
+        const payload = {
+            email: formData.get("email"),
+            message: formData.get("message"),
+            botField: formData.get("botField"),
+        };
 
         try {
-            const response = await fetch("https://api.web3forms.com/submit", {
+            const response = await fetch("/api/contact", {
                 method: "POST",
                 headers: {
-                    "Accept": "application/json"
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
                 },
-                body: formData
+                body: JSON.stringify(payload),
             });
             const result = await response.json();
             if (result.success) {
@@ -719,6 +723,15 @@ const Home = () => {
             <section id="contact-section" className="max-w-4xl mx-auto py-12 px-6 flex flex-col items-center">
                 <div className="form-container">
                     <form onSubmit={handleFormSubmit} className="form">
+                        {/* Honeypot — hidden from users; bots that fill it are silently dropped */}
+                        <input
+                            type="text"
+                            name="botField"
+                            tabIndex={-1}
+                            autoComplete="off"
+                            aria-hidden="true"
+                            style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                        />
                         <div className="form-group">
                             <label htmlFor="email">{t('contact.emailLabel')}</label>
                             <input type="email" id="email" name="email" required placeholder={t('contact.emailPlaceholder')} />
