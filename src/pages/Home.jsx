@@ -7,10 +7,8 @@ import {
     Search,
     BarChart3,
     Globe,
-    Mail,
     Zap,
     Layout,
-    Smartphone,
     PenTool,
     Code,
     ArrowUpRight,
@@ -719,7 +717,6 @@ const Home = () => {
 
             {/* Contact Form Section */}
             <section id="contact-section" className="max-w-4xl mx-auto py-12 px-6 flex flex-col items-center">
-                <h2 className="text-3xl font-bold mb-8 text-black text-center">{t('contact.title')}</h2>
                 <div className="form-container">
                     <form onSubmit={handleFormSubmit} className="form">
                         <div className="form-group">
@@ -743,39 +740,9 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Footer CTA */}
-            <section className="max-w-4xl mx-auto py-24 px-6 text-center">
-                <div className="bg-white p-8 md:p-20 rounded-[3rem] md:rounded-[4rem] border border-black/5 shadow-sm flex flex-col items-center">
-                    <div className="w-16 h-12 flex items-center justify-center mb-10">
-                        {/* Minimal handshake icon replacement */}
-                        <svg viewBox="0 0 24 24" className="w-10 h-10 opacity-30 fill-none stroke-current" strokeWidth="1.5">
-                            <path d="M10 13a2 2 0 100-4 2 2 0 000 4zM21 15a2 2 0 11-4 0 2 2 0 014 0z" />
-                            <path d="M5 20c0-2.5 4-4 7-4s7 1.5 7 4M10 13l-4 4" />
-                        </svg>
-                    </div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-12 text-black tracking-tight leading-none px-4">
-                        {t('footer.heading')}
-                    </h2>
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                        <a
-                            href={`mailto:${email}`}
-                            className="bg-black text-white px-8 py-3 rounded-full font-bold hover:scale-[1.02] transition-transform flex items-center justify-center gap-2 shadow-lg shadow-black/10 w-full sm:w-auto"
-                        >
-                            <Mail className="w-5 h-5" />
-                            {t('footer.email')}
-                        </a>
-                        <a
-                            href="https://wa.me/639956411291"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="bg-white text-black border border-black/10 px-8 py-3 rounded-full font-bold hover:bg-black/5 transition-colors shadow-sm flex items-center justify-center gap-2 w-full sm:w-auto"
-                        >
-                            <Smartphone className="w-5 h-5" />
-                            {t('footer.whatsapp')}
-                        </a>
-                    </div>
-                </div>
-                <div className="mt-20 pt-10 border-t border-black/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-black/30 text-[12px] font-medium uppercase tracking-widest">
+            {/* Footer */}
+            <footer className="max-w-4xl mx-auto pt-12 pb-8 px-6">
+                <div className="pt-10 border-t border-black/5 flex flex-col sm:flex-row justify-between items-center gap-6 text-black/30 text-[12px] font-medium uppercase tracking-widest">
                     <span>{t('footer.copyright')}</span>
                     <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 items-center">
                         <a href="https://www.linkedin.com/in/suneel-p/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors flex items-center gap-2">
@@ -796,7 +763,7 @@ const Home = () => {
                         </a>
                     </div>
                 </div>
-            </section>
+            </footer>
         </div>
     );
 };
