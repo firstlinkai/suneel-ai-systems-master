@@ -42,14 +42,12 @@ const scrollToResults = () => {
 
 const SavingsCalculator = () => {
     const { t } = usePreferences();
-    const [volume, setVolume] = useState(10);
-    const costPerPost = 150;
-    const aiCostPerPost = 15;
-    const hoursPerManualPost = 4;
-    const hoursPerAIPost = 0.1;
+    const [systems, setSystems] = useState(1);
+    const savingsPerSystem = 3500; // avg. monthly labor saved per deployed system
+    const hoursPerSystem = 120; // agency hours reclaimed per system per month
 
-    const savedHours = (volume * (hoursPerManualPost - hoursPerAIPost)).toFixed(1);
-    const costSaved = volume * (costPerPost - aiCostPerPost);
+    const costSaved = systems * savingsPerSystem;
+    const savedHours = systems * hoursPerSystem;
 
     return (
         <div className="max-w-2xl mx-auto space-y-12 font-['Inter']">
@@ -57,15 +55,15 @@ const SavingsCalculator = () => {
                 <div className="flex justify-between items-center text-[14px] font-bold">
                     <span className="text-black/60 uppercase tracking-wider">{t('calc.scaleLabel')}</span>
                     <span className="bg-black text-white px-4 py-1 rounded-lg">
-                        {volume} {t('calc.assets')}
+                        {systems}{systems >= 30 ? '+' : ''} {t('calc.assets')}
                     </span>
                 </div>
                 <input
                     type="range"
                     min="1"
-                    max="100"
-                    value={volume}
-                    onChange={(e) => setVolume(parseInt(e.target.value))}
+                    max="30"
+                    value={systems}
+                    onChange={(e) => setSystems(parseInt(e.target.value))}
                     className="w-full h-1 bg-black/10 rounded-lg appearance-none cursor-pointer accent-black"
                 />
                 <div className="flex justify-between text-[11px] font-bold text-black/30 uppercase">
@@ -82,10 +80,7 @@ const SavingsCalculator = () => {
                 </div>
                 <div className="space-y-1 border-t sm:border-t-0 sm:border-l border-black/5 pt-8 sm:pt-0 sm:pl-8 text-left">
                     <p className="text-[12px] font-black uppercase tracking-[0.2em] text-black/30">{t('calc.timeTitle')}</p>
-                    <div className="flex items-baseline gap-2">
-                        <p className="text-3xl md:text-4xl font-bold text-black">{savedHours}</p>
-                        <span className="text-lg font-bold text-black/40">{t('calc.hours')}</span>
-                    </div>
+                    <p className="text-3xl md:text-4xl font-bold text-black">{savedHours.toLocaleString()}</p>
                     <p className="text-[13px] text-black/40">{t('calc.timeSub')}</p>
                 </div>
             </div>
