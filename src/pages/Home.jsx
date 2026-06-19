@@ -555,7 +555,10 @@ const Home = () => {
 
         const formData = new FormData(e.target);
         const payload = {
+            name: formData.get("name"),
             email: formData.get("email"),
+            company: formData.get("company"),
+            employee_count: formData.get("employee_count"),
             message: formData.get("message"),
             botField: formData.get("botField"),
         };
@@ -733,8 +736,26 @@ const Home = () => {
                             style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
                         />
                         <div className="form-group">
+                            <label htmlFor="name">{t('contact.nameLabel')}</label>
+                            <input type="text" id="name" name="name" required placeholder={t('contact.namePlaceholder')} />
+                        </div>
+                        <div className="form-group">
                             <label htmlFor="email">{t('contact.emailLabel')}</label>
                             <input type="email" id="email" name="email" required placeholder={t('contact.emailPlaceholder')} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="company">{t('contact.companyLabel')}</label>
+                            <input type="text" id="company" name="company" placeholder={t('contact.companyPlaceholder')} />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="employee_count">{t('contact.employeesLabel')}</label>
+                            <select id="employee_count" name="employee_count" defaultValue="">
+                                <option value="" disabled>{t('contact.employeesPlaceholder')}</option>
+                                <option value="1–10">1–10</option>
+                                <option value="11–50">11–50</option>
+                                <option value="51–200">51–200</option>
+                                <option value="201+">201+</option>
+                            </select>
                         </div>
                         <div className="form-group">
                             <label htmlFor="textarea">{t('contact.msgLabel')}</label>
