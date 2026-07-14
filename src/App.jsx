@@ -6,11 +6,19 @@ import Projects from './pages/Projects';
 import DevLab from './pages/DevLab';
 import { PreferencesProvider } from './context/PreferencesContext';
 import AccessibilityControls from './components/AccessibilityControls';
+import usePageTracking from './hooks/usePageTracking';
+
+// Reports GA4 page views on route changes. Must live inside <Router>.
+function RouteChangeTracker() {
+  usePageTracking();
+  return null;
+}
 
 function App() {
   return (
     <PreferencesProvider>
       <Router>
+        <RouteChangeTracker />
         <AccessibilityControls />
         <Routes>
           <Route path="/" element={<Home />} />
